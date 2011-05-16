@@ -6,19 +6,13 @@ class NavigationTagsExtension < Radiant::Extension
   description "Makes building navigations much easier."
   url "http://yourwebsite.com/navigation_tags"
   
-  # define_routes do |map|
-  #   map.connect 'admin/navigation_tags/:action', :controller => 'admin/navigation_tags'
-  # end
-  
-  define_routes do |map|
-    map.namespace :admin, :member => { :remove => :get } do |admin|
-      admin.resources :navigation_types
-    end
-  end
-  
   def activate
     Page.send :include, NavigationTags
-    admin.nav[:content] << admin.nav_item("Navigation Type", "/admin/navigation_types")
+    
+    tab "Content" do
+    	add_item("Navigation Type", "/admin/navigation_types", :after => "Layouts", :visibility => [:all])
+    end
+    
     admin.page.edit.add :form_bottom, "navigation_type", :before => 'edit_buttons'
   end
   
