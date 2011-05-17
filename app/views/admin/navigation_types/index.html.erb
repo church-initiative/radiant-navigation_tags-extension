@@ -1,14 +1,14 @@
 <h1>Navigation Type</h1>
 <% if @navigation_types.blank? %>
-  <p>No navigation types in database</p> 
+  <p>No navigation types in database</p>
 <% else %>
-  <table class="index" >
+  <table class="index">
      <% @navigation_types.each do |navType| %>
        <tr class="node level-0">
          <td class="page"><%= link_to  navType.name, { :action => 'edit', :id => navType.id } %></td>
          <td class="page"><%= link_to 'Remove Navigation Type', remove_admin_navigation_type_url(:id => navType.id) %></td>
        </tr>
-    <%end%>
+    <%- end %>
   </table>
 <%- end %>
 
